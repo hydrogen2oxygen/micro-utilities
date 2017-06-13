@@ -1,0 +1,7 @@
+.project
+.settings/
+*.orig
+*.gz
+*.log
+.classpath
+target/
