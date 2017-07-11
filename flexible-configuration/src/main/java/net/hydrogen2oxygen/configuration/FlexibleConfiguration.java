@@ -1,6 +1,5 @@
 package net.hydrogen2oxygen.configuration;
 
-
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -75,8 +74,13 @@ public class FlexibleConfiguration {
 
 			if (value != null) {
 				Method setterMethod = object.getClass().getMethod("set" + firstCharacterBig(field.getName()),
-				        String.class);
-				setterMethod.invoke(object, value);
+				        field.getType());
+
+				if (field.getType().isAssignableFrom(Integer.class)) {
+					setterMethod.invoke(object, Integer.parseInt(value));
+				} else {
+					setterMethod.invoke(object, value);
+				}
 			}
 		}
 	}
